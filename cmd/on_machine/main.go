@@ -5,7 +5,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"github.com/seanbreckenridge/on_machine"
+	"github.com/purarue/on_machine"
 	"os"
 )
 
@@ -65,7 +65,7 @@ match
 Directory/path matching, Uses the pattern to match directory structures.
 Can provide the base path to use with -base, that replaces '/' with
 OS-specific path separator in the pattern. For more information, see the docs:
-https://github.com/seanbreckenridge/on_machine
+https://github.com/purarue/on_machine
 
 Options:
 `)

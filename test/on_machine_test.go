@@ -2,7 +2,7 @@ package on_machine_test
 
 import (
 	"fmt"
-	"github.com/seanbreckenridge/on_machine"
+	"github.com/purarue/on_machine"
 	"testing"
 )
 

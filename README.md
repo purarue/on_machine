@@ -36,14 +36,14 @@ This borrows a lot of ideas from tools like [`neofetch`](https://github.com/dyla
 
 Using `go install` to put it on your `$GOBIN`:
 
-`go install github.com/seanbreckenridge/on_machine/cmd/on_machine@latest`
+`go install github.com/purarue/on_machine/cmd/on_machine@latest`
 
 I recommend you have both `uname` and `lsb_release` installed if possible on `linux`, that makes distribution detection much nicer. Otherwise, this defaults to the `golang` `runtime` module defaults
 
 To manually build:
 
 ```bash
-git clone https://github.com/seanbreckenridge/on_machine
+git clone https://github.com/purarue/on_machine
 cd ./on_machine
 go build ./cmd/on_machine
 # copy binary somewhere on your $PATH
@@ -78,7 +78,7 @@ match
 Directory/path matching, Uses the pattern to match directory structures.
 Can provide the base path to use with -base, that replaces '/' with
 OS-specific path separator in the pattern. For more information, see the docs:
-https://github.com/seanbreckenridge/on_machine
+https://github.com/purarue/on_machine
 
 Options:
 
@@ -132,7 +132,7 @@ android_termux_phone
 
 This can be thought of as an alternative to the above, its a different way to figure out what code to run on different machines, by placing scripts in a particular directory structure
 
-You can manually do case/regex statements in bash (and often that is enough), but in some cases that can become complicated. I use this to match [background processes](https://github.com/seanbreckenridge/bgproc) scripts on different machines -- to figure out which bash scripts to run. Those are organized like:
+You can manually do case/regex statements in bash (and often that is enough), but in some cases that can become complicated. I use this to match [background processes](https://github.com/purarue/bgproc) scripts on different machines -- to figure out which bash scripts to run. Those are organized like:
 
 ```
 matching_examples/dir_based
@@ -158,15 +158,15 @@ Then, say my hostname is `home`, and I'm on my `arch` machine. The `match` comma
 
 ```bash
 $ on_machine -cmd match -base ./matching_examples/dir_based '%o/%d/%h'
-/home/sean/Repos/on_machine/matching_examples/dir_based/all
-/home/sean/Repos/on_machine/matching_examples/dir_based/linux
-/home/sean/Repos/on_machine/matching_examples/dir_based/linux/arch
-/home/sean/Repos/on_machine/matching_examples/dir_based/linux/arch/home
+/home/username/Repos/on_machine/matching_examples/dir_based/all
+/home/username/Repos/on_machine/matching_examples/dir_based/linux
+/home/username/Repos/on_machine/matching_examples/dir_based/linux/arch
+/home/username/Repos/on_machine/matching_examples/dir_based/linux/arch/home
 ```
 
 Note: `all` is like a `*`, its always matched -- so that would be where I store shared jobs.
 
-[`bgproc_on_machine`](https://github.com/seanbreckenridge/bgproc/blob/master/bgproc_on_machine) uses multiple directories to organize different jobs. That uses on_machine internally like:
+[`bgproc_on_machine`](https://github.com/purarue/bgproc/blob/master/bgproc_on_machine) uses multiple directories to organize different jobs. That uses on_machine internally like:
 
 ```bash
 MATCHES=()
@@ -180,15 +180,15 @@ done < <(on_machine -cmd match -print0 -filter dir -base "$base" '%o/%d')
 ```
 $ bgproc_on_machine -o
 1655993990:Searching for jobs in:
-1655993990:/home/sean/data/jobs/all
-1655993990:/home/sean/data/jobs/linux
-1655993990:/home/sean/.local/scripts/supervisor_jobs/all
-1655993990:/home/sean/.local/scripts/supervisor_jobs/linux
-1655993990:/home/sean/Repos/HPI-personal/jobs/all
-1655993990:/home/sean/Repos/HPI-personal/jobs/linux
+1655993990:/home/username/data/jobs/all
+1655993990:/home/username/data/jobs/linux
+1655993990:/home/username/.local/scripts/supervisor_jobs/all
+1655993990:/home/username/.local/scripts/supervisor_jobs/linux
+1655993990:/home/username/Repos/HPI-personal/jobs/all
+1655993990:/home/username/Repos/HPI-personal/jobs/linux
 ```
 
-For a real example of one of these directory structures, see [my HPI jobs](https://github.com/seanbreckenridge/HPI-personal/tree/master/jobs)
+For a real example of one of these directory structures, see [my HPI jobs](https://github.com/purarue/HPI-personal/tree/master/jobs)
 
 If the pattern includes an extension, this extracts that and tries to match at each level going down. For example, for setting up your `~/.zshrc` setup: I want some code that runs everywhere (`all.zsh`), some that runs on `android`, some that runs on `linux`, and then additional code that runs on `linux` and `arch`. So, given:
 
@@ -207,9 +207,9 @@ On my arch machine, using the pattern `%o/%d.zsh`, this matches:
 
 ```bash
 $ on_machine -cmd match -base ./matching_examples/with_extensions -filter file '%o/%d.zsh
-/home/sean/Repos/on_machine/matching_examples/with_extensions/all.zsh
-/home/sean/Repos/on_machine/matching_examples/with_extensions/linux/arch.zsh
-/home/sean/Repos/on_machine/matching_examples/with_extensions/linux.zsh
+/home/username/Repos/on_machine/matching_examples/with_extensions/all.zsh
+/home/username/Repos/on_machine/matching_examples/with_extensions/linux/arch.zsh
+/home/username/Repos/on_machine/matching_examples/with_extensions/linux.zsh
 ```
 
 Essentially, this lets me pick what scripts to run organized as a directory, instead of ever-growing `case` statement in a `bash` script somewhere.

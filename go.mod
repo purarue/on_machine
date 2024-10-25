@@ -1,3 +1,3 @@
-module github.com/seanbreckenridge/on_machine
+module github.com/purarue/on_machine
 
 go 1.18
