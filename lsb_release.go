@@ -16,7 +16,8 @@ func LsbReleaseSh() (*string, error) {
 		if err != nil {
 			return nil, err
 		}
-		outStr := strings.ToLower(strings.TrimSpace(string(out)))
+		// remove double quotes from beginning/end
+		outStr := strings.ToLower(strings.Trim(strings.TrimSpace(string(out)), "\""))
 		return &outStr, nil
 	})
 	if lsbRes, ok := result.(*string); ok {
